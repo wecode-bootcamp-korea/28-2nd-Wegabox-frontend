@@ -5,7 +5,10 @@ export default function Movie({ movie, pageName }) {
   const navigate = useNavigate();
 
   const goToTicketingThisMovie = movieId => {
-    navigate('/ticketing', { state: { movieId: movieId }, replace: false });
+    navigate('/ticketing', {
+      state: { movie_id: movieId },
+      replace: false,
+    });
   };
 
   return (
