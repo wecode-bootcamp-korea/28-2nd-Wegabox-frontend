@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 
 export default function Main() {
-  const Component = styled.div`
-    color: ${props => props.theme.wegaboxPurple};
-  `;
-
   return (
     <div>
       <Component>
@@ -12,4 +8,7 @@ export default function Main() {
       </Component>
     </div>
   );
+  const Component = styled.div`
+    color: ${props => props.theme.wegaboxPurple};
+  `;
 }
