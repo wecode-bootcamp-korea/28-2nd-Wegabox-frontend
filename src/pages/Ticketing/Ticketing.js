@@ -1,0 +1,144 @@
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import DateSelect from './DateSelect/DateSelect';
+import MovieSelect from './MovieSelect/MovieSelect';
+import RegionSelect from './TheaterSelect/RegionSelect';
+import ScheduleSelect from './ScheduleSelect/ScheduleSelect';
+import { dateConverter, makeQueryString } from '../../utils/Functions';
+import styled from 'styled-components';
+
+const Ticketing = () => {
+  const [allData, setAllData] = useState({});
+  const [selection, setSelection] = useState({
+    date: '', //날짜 문자열 데이터
+    movie: '', //영화 id 값
+    region: '', // 영화관 지역 id 값
+    theater: '', //극장 id 값
+    schedule: '', //상영시간 id 값
+    deactiveMovie: '',
+  });
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = useLocation();
+  // const selectedMovieId = state?.movie_id;
+
+  // console.log(selectedMovieId);
+  console.log('렌더링', state);
+
+  useEffect(() => {
+    console.log('fetching');
+
+    if (selection.schedule) {
+      fetch(`https://12d7-211-106-114-186.ngrok.io/ticketings`, {
+        method: 'POST',
+        headers: {
+          Authorization:
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.4YEzZNRcwdhQwufQjjNUcaM5z4s6SSEXooJ6N8SvVsY',
+        },
+        body: JSON.stringify({ schedule_id: `${selection.schedule}` }),
+      })
+        .then(res => res.json())
+        .then(result => {
+          alert(result.message);
+          navigate('/');
+        });
+    } else {
+      fetch(
+        `https://12d7-211-106-114-186.ngrok.io/ticketings${location.search}`
+      )
+        .then(response => response.json())
+        .then(result => {
+          setAllData(result);
+        });
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    console.log('오늘날짜 selection.date 수정');
+    const date = new Date();
+
+    setSelection(prev => {
+      if (state) {
+        prev.deactiveMovie = state ? state.movie_id : '';
+        prev.date = dateConverter(date);
+      } else {
+        prev.date = dateConverter(date);
+      }
+      return { ...prev };
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log('쿼리 만들어주기');
+
+    const queryUrl = makeQueryString(selection);
+    navigate(queryUrl);
+  }, [selection]);
+
+  return (
+    <TicketingContainer>
+      <Title>빠른 예매</Title>
+      <SelectContainer>
+        <DateSelect
+          selection={selection}
+          setSelection={setSelection}
+          state={state}
+          fastDate={allData.fast_date}
+        />
+        <MovieSelect
+          allMovieData={allData.all_movies_list}
+          ableMovieData={allData.able_movies_list}
+          setSelection={setSelection}
+          selection={selection}
+        />
+        <RegionSelect
+          allRegionData={allData.all_regions_list}
+          ableRegionData={allData.able_regions_list}
+          allTheaterData={allData.all_theaters_list}
+          ableTheaterData={allData.able_theaters_list}
+          selection={selection}
+          setSelection={setSelection}
+        />
+        <ScheduleSelect
+          scheduleList={allData.schedules_list}
+          selection={selection}
+          setSelection={setSelection}
+        />
+      </SelectContainer>
+    </TicketingContainer>
+  );
+};
+
+const TicketingContainer = styled.div`
+  margin: auto;
+  margin-top: 130px;
+  width: 1300px;
+  height: 570px;
+  /* border: 1px solid red; */
+`;
+
+const Title = styled.span`
+  display: inline-block;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  padding-left: 10px;
+  margin-bottom: 25px;
+  font-size: 50px;
+  color: ${props => props.theme.wegaboxDarkPurple};
+`;
+
+const SelectContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  width: 100%;
+  height: 80%;
+  border: 3px solid ${props => props.theme.wegaboxDarkPurple};
+  /* background-color: pink; */
+`;
+
+// const valid = query => {};
+
+export default Ticketing;
