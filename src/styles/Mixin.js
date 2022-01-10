@@ -11,3 +11,10 @@ const flexCenter = css`
   justify-content: center;
   align-items: center;
 `;
+
+const mixin = {
+  widthHeight,
+  flexCenter,
+};
+
+export default mixin;
