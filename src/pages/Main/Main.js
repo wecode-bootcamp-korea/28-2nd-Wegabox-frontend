@@ -4,11 +4,14 @@ export default function Main() {
   return (
     <div>
       <Component>
-        <span>test</span>
+        <span>박스오피스</span>
       </Component>
     </div>
   );
-  const Component = styled.div`
-    color: ${props => props.theme.wegaboxPurple};
-  `;
 }
+
+const Component = styled.div`
+  color: ${props => props.theme.wegaboxPurple};
+  font-size: 1.2rem;
+  font-family: 'NanumBarunGothic';
+`;
