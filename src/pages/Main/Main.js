@@ -13,5 +13,4 @@ export default function Main() {
 const Component = styled.div`
   color: ${props => props.theme.wegaboxPurple};
   font-size: 1.2rem;
-  font-family: 'NanumBarunGothic';
 `;
