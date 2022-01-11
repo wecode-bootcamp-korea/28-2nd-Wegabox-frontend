@@ -10,6 +10,16 @@ ${reset}
   box-sizing: border-box;
 }
 
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+body {
+  font-family: "NanumBarunGothic";
+}
+
 ol,
 ul {
   list-style: none;
