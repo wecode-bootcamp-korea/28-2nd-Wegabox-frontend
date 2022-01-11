@@ -27,10 +27,5 @@ button {
 a {
   text-decoration: none;
 }
-
-@import url("https://hangeul.pstatic.net/hangeul_static/css/nanum-barun-gothic.css");
-  font-family: 'NanumBarunGothic', 'sans-serif';
-  font-size: 14px;
-  color: #222222;
 `;
 export default GlobalStyle;
