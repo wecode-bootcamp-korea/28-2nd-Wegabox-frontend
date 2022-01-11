@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Main from './pages/Main/Main';
 import MovieList from './pages/MovieList/MovieList';
+import KakaoLogin from './components/Kakao/KakaoLogin';
 import Footer from './components/Footer/Footer';
 import Ticketing from './pages/Ticketing/Ticketing';
 import MovieDetail from './pages/MovieDetail/MovieDetail';
@@ -16,6 +17,7 @@ export default function Router() {
         <Route path="/movies" element={<MovieList />} />
         <Route path="/ticketing" element={<Ticketing />} />
         <Route path="/movie-detail/:id" element={<MovieDetail />} />
+        <Route path="/login_kakao" element={<KakaoLogin />} />
       </Routes>
       <Footer />
     </BrowserRouter>

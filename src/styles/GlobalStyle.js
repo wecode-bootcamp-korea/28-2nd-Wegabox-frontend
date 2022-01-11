@@ -43,5 +43,10 @@ html, body {
 a {
   text-decoration: none;
 }
+
+body {
+  font-family: "NanumBarunGothic";
+}
+
 `;
 export default GlobalStyle;

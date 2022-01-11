@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import KakaoLogin from '../Kakao/Login';
 import { FaBars, FaSearch, FaCalendarAlt, FaUserAlt } from 'react-icons/fa';
 
 export default function Nav() {
@@ -19,7 +20,7 @@ export default function Nav() {
                 {LeftMenuList.map((menu, idx) => {
                   return (
                     <LeftMenu key={idx}>
-                      <button>{menu.name}</button>
+                      <button>{menu.name}</button>g
                     </LeftMenu>
                   );
                 })}
@@ -31,10 +32,7 @@ export default function Nav() {
               </a>
             </Ci>
             <MenuSubWrapper>
-              <Menu>
-                <RightMenuSignUp>회원가입</RightMenuSignUp>
-                <RightMenuLogIn>로그인</RightMenuLogIn>
-              </Menu>
+              <KakaoLogin />
               <IconButton>
                 <FaCalendarAlt />
               </IconButton>
@@ -71,7 +69,6 @@ const NavWrapper = styled.div`
 `;
 
 const NavMain = styled.main`
-  width: 1200px;
   margin: 0 auto;
   color: white;
 `;
@@ -79,7 +76,7 @@ const NavMain = styled.main`
 const MenuWrapper = styled.section`
   min-width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   font-size: 30px;
 `;
 
@@ -129,12 +126,4 @@ const Ci = styled.div`
     transform: translate(-60%);
     top: 17px;
   }
-`;
-
-const RightMenuSignUp = styled.button`
-  padding-right: 52px;
-`;
-
-const RightMenuLogIn = styled.button`
-  padding-right: 52px;
 `;
