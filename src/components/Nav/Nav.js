@@ -1,55 +1,58 @@
-import reactDom from 'react-dom';
-import styled, { css } from 'styled-components';
+// import reactDom from 'react-dom';
+import styled from 'styled-components';
+// import { css } from 'styled-components';
+
 import { FaBars, FaSearch, FaCalendarAlt, FaUserAlt } from 'react-icons/fa';
 
 export default function Nav() {
   return (
     <Navigator>
-      <Navmain>
-        {/* <section className="navUpper">navUpper</section> */}
-        <Menuwrapper>
-          <Menusubwrapper>
-            <Button>
-              <FaBars />
-            </Button>
-            <Button>
-              <FaSearch />
-            </Button>
-            <Menu>
-              {LeftMenuList.map((menu, idx) => {
-                return (
-                  <Leftmenu key={idx}>
-                    <div>{menu.name}</div>
-                  </Leftmenu>
-                );
-              })}
-            </Menu>
-          </Menusubwrapper>
-          <Ci>
-            <a href="/">
-              <img src="/images/logo.jpeg" alt="로고" />
-            </a>
-          </Ci>
-          <Menusubwrapper>
-            <Menu>
-              {RightMenuList.map((menu, idx) => {
-                return (
-                  <Rightmenu key={idx}>
-                    <div>{menu.name}</div>
-                  </Rightmenu>
-                );
-              })}
-            </Menu>
-            <Button>
-              <FaCalendarAlt />
-            </Button>
-            <Button>
-              <FaUserAlt />
-            </Button>
-          </Menusubwrapper>
-        </Menuwrapper>
-      </Navmain>
-      <Navbottom>navBottom</Navbottom>
+      <Navwrapper>
+        <Navmain>
+          <Menuwrapper>
+            <Menusubwrapper>
+              <Iconbutton>
+                <FaBars />
+              </Iconbutton>
+              <Iconbutton>
+                <FaSearch />
+              </Iconbutton>
+              <Menu>
+                {LeftMenuList.map((menu, idx) => {
+                  return (
+                    <Leftmenu key={idx}>
+                      <button>{menu.name}</button>
+                    </Leftmenu>
+                  );
+                })}
+              </Menu>
+            </Menusubwrapper>
+            <Ci>
+              <a href="/">
+                <img src="/images/logo.jpeg" alt="로고" />
+              </a>
+            </Ci>
+            <Menusubwrapper>
+              <Menu>
+                {RightMenuList.map((menu, idx) => {
+                  return (
+                    <Rightmenu key={idx}>
+                      <button>{menu.name}</button>
+                    </Rightmenu>
+                  );
+                })}
+              </Menu>
+              <Iconbutton>
+                <FaCalendarAlt />
+              </Iconbutton>
+              <Iconbutton>
+                <FaUserAlt />
+              </Iconbutton>
+            </Menusubwrapper>
+          </Menuwrapper>
+        </Navmain>
+        <Navbottom>navBottom</Navbottom>
+      </Navwrapper>
     </Navigator>
   );
 }
@@ -77,54 +80,56 @@ const RightMenuList = [
 ];
 
 const Navigator = styled.div`
-  position: absolute;
-  max-height: 150vh;
-  position: fixed;
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: 100%;
+  top: 0;
+  background-color: #362361;
+`;
+
+const Navwrapper = styled.div`
+  position: relative;
 `;
 
 const Navmain = styled.main`
-  position: relative;
-  min-width: 1100px;
-  border-bottom: 1px solid black;
+  width: 1200px;
+  margin: 0 auto;
+  color: white;
 `;
 
 const Menuwrapper = styled.section`
-  margin: 0 auto;
-  /* width: 100%; */
   min-width: 100%;
   display: flex;
   justify-content: space-between;
   font-size: 30px;
-  /* background-color: #b8d5e3; */
 `;
 
 const Menusubwrapper = styled.article`
   display: flex;
 `;
 
-const Button = styled.button`
+const Iconbutton = styled.button`
   border: 0;
   outline: none;
-  color: #666666;
   font-size: 22px;
   padding: 0 9px;
   margin-top: 5px;
+  color: white;
 `;
 
-// ${props => props.mixin.flexCenter};
 const Menu = styled.ul`
   display: flex;
   align-items: start;
-  padding-right: 45px;
-  padding-left: 45px;
-  margin: 25px 0;
-  height: 46px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #666666;
+
+  button {
+    /* padding-right: 45px; */
+    padding-left: 45px;
+    margin: 22.5px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
 `;
 
 const Leftmenu = styled.li`
@@ -132,23 +137,16 @@ const Leftmenu = styled.li`
   margin-left: 45px;
   padding-top: 5px;
   padding-bottom: 10px;
-  /* background-color: red; */
   justify-content: space-between;
 `;
 
 const Ci = styled.div`
-  a {
-    color: #666666;
-    font-size: 25px;
-    font-weight: 400;
-    img {
-      height: 100px;
-      width: 160px;
-      position: absolute;
-      left: 50%;
-      transform: translate(-60%);
-      top: 7px;
-    }
+  img {
+    width: 130px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-60%);
+    top: 7px;
   }
 `;
 
@@ -160,6 +158,7 @@ const Rightmenu = styled.li`
 `;
 
 const Navbottom = styled.section`
-  height: 40px;
-  /* background-color: #d1cca1; */
+  height: 41px;
+  background-color: #d1cca1;
+  border-top: 1px solid black;
 `;
