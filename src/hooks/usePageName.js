@@ -7,10 +7,8 @@ const usePageName = () => {
 
   useEffect(() => {
     const PATHNAME = location.pathname;
-    if (PATHNAME === '/movies') {
-      setPageName('list');
-    }
-    setPageName('main');
+    if (PATHNAME === '/movies') setPageName('list');
+    else setPageName('main');
   }, [location]);
 
   return { pageName, location };

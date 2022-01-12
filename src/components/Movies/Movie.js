@@ -10,18 +10,16 @@ export default function Movie({ movie, pageName }) {
 
   return (
     <MovieStyle>
-      <img alt={movie.title} src={movie.thumbnail_url} />
-      <MovieDescriptionStyle className="description">
-        {movie.description}
-      </MovieDescriptionStyle>
-      <MovieInfoStyle $pageName={pageName}>
+      <MovieImageStyle alt={movie.title} src={movie.thumbnail_url} />
+      <MovieDescriptionStyle>{movie.description}</MovieDescriptionStyle>
+      <MovieInfoStyle pageName={pageName}>
         <MovieTitleStyle>{movie.title}</MovieTitleStyle>
         <MovieReleaseDateStyle>
           개봉일: {movie.release_date}
         </MovieReleaseDateStyle>
       </MovieInfoStyle>
       <MovieButtonStyle
-        $pageName={pageName}
+        pageName={pageName}
         onClick={() => goToTicketingThisMovie(movie.movie_id)}
       >
         예매
@@ -29,28 +27,27 @@ export default function Movie({ movie, pageName }) {
     </MovieStyle>
   );
 }
-
 const MovieStyle = styled.div`
   font-size: 1.2rem;
   text-align: center;
+  position: relative;
+`;
 
-  img {
-    margin-bottom: 0.5rem;
-    width: 240px;
-    height: 350px;
-    border-radius: 5px;
-    object-fit: cover;
-    position: relative;
+const MovieImageStyle = styled.img`
+  margin-bottom: 0.5rem;
+  width: 240px;
+  height: 350px;
+  border-radius: 5px;
+  object-fit: cover;
 
-    &:hover {
-      cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
   }
 `;
 
 const MovieDescriptionStyle = styled.div`
   position: absolute;
-  top: 7.95rem;
+  top: 0;
   width: 240px;
   height: 350px;
   margin-left: 1.1rem;
@@ -60,7 +57,7 @@ const MovieDescriptionStyle = styled.div`
   font-size: 1rem;
   line-height: 1.5;
   background-color: rgba(0, 0, 0, 0.5);
-  color: ${props => props.theme.whiteColor};
+  color: ${({ theme }) => theme.whiteColor};
   opacity: 0;
 
   &:hover {
@@ -69,15 +66,11 @@ const MovieDescriptionStyle = styled.div`
   }
 `;
 
-const MovieReleaseDateStyle = styled.p`
-  margin-bottom: 0.4rem;
-`;
-
 const MovieInfoStyle = styled.div`
   font-size: 1rem;
-  color: ${props => props.theme.fontGrey};
-  display: ${props => {
-    switch (props.$pageName) {
+  color: ${({ theme }) => theme.fontGrey};
+  display: ${({ pageName }) => {
+    switch (pageName) {
       case 'main':
         return 'none';
       default:
@@ -87,8 +80,13 @@ const MovieInfoStyle = styled.div`
 `;
 
 const MovieTitleStyle = styled.p`
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
   font-size: 1.2rem;
+  font-weight: 600;
+`;
+
+const MovieReleaseDateStyle = styled.p`
+  margin-bottom: 0.6rem;
 `;
 
 const MovieButtonStyle = styled.button`
@@ -97,13 +95,13 @@ const MovieButtonStyle = styled.button`
   line-height: 36px;
   font-size: 0.9rem;
   border-radius: 5px;
-  color: ${props => props.theme.whiteColor};
-  background-color: ${props => {
-    switch (props.$pageName) {
+  color: ${({ theme }) => theme.whiteColor};
+  background-color: ${({ theme, pageName }) => {
+    switch (pageName) {
       case 'main':
-        return props.theme.buttonBlue;
+        return theme.buttonBlue;
       default:
-        return props.theme.wegaboxPurple;
+        return theme.wegaboxPurple;
     }
   }};
 `;
