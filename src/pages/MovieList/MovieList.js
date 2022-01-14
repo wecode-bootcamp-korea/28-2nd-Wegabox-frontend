@@ -1,59 +1,78 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState } from 'react';
 import { animateScroll as scroll } from 'react-scroll';
 import styled from 'styled-components';
 import usePageName from '../../hooks/usePageName';
 import Movies from '../../components/Movies/Movies';
 import { DEV_LIST_URL, DEV_LIST_URL2 } from '../../config';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import SwitchButton from './SwitchButton';
+import useFetch from '../../hooks/useFetch';
+import Loading from '../../components/Loading/Loading';
 
 export default function MovieList() {
   const [movies, setMovies] = useState([]);
-  const [totalMovieCnt, setTotalMovieCnt] = useState(0);
+  const [totalMovie, setTotalMovie] = useState(0);
   const [offset, setOffset] = useState(0);
   const [showTopBtn, setShowTopBtn] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const { pageName } = usePageName();
-  const LIMIT = 4;
+  const LIMIT = 8;
+  const url = `${DEV_LIST_URL2}?offset=${offset}&limit=${LIMIT}&released=${isChecked}`;
+  const [loading, result, fetchData] = useFetch(url);
 
   useEffect(() => {
-    fetch(`${DEV_LIST_URL}?offset=${offset}&limit=${LIMIT}`)
-      .then(res => res.json())
-      .then(result => {
-        setMovies(prevMovies => [...prevMovies, ...result.result]);
-        setTotalMovieCnt(result.total_movie.total_movie);
-      });
-    const watch = () => {
-      window.addEventListener('scroll', handleShowTopButton);
+    fetchData();
+  }, [offset, isChecked]);
+
+  useEffect(() => {
+    result?.result &&
+      setMovies(prevMovies => [...prevMovies, ...result?.result]);
+    setTotalMovie(result?.total_movie?.total_movie);
+  }, [result]);
+
+  useEffect(() => {
+    const handleShowTopButton = () => {
+      if (window.scrollY > 100) setShowTopBtn(true);
+      else return setShowTopBtn(false);
     };
-    watch();
+    window.addEventListener('scroll', handleShowTopButton);
     return () => {
       window.removeEventListener('scroll', handleShowTopButton);
     };
-  }, [offset]);
+  }, []);
 
-  const showMoreBtn = movies.length === totalMovieCnt;
+  const showMoreBtn = movies.length === totalMovie;
 
-  const updateOffset = useCallback(() => {
-    if (!showMoreBtn) setOffset(offset + LIMIT);
-    else return;
-  }, [offset, showMoreBtn]);
+  const updateOffset = () => {
+    if (!showMoreBtn) {
+      setOffset(offset + LIMIT);
+    } else return;
+  };
 
-  const handleShowTopButton = () => {
-    if (window.scrollY > 100) setShowTopBtn(true);
-    else return setShowTopBtn(false);
+  const handleToggleCheckbox = () => {
+    resetStates();
+    setIsChecked(!isChecked);
+  };
+
+  const resetStates = () => {
+    setMovies([]);
+    setOffset(0);
   };
 
   const moveToTop = () => {
     scroll.scrollToTop();
   };
 
-  if (!movies) {
-    return <img alt="로딩" src="/images/loading.gif" />;
-  }
+  if (loading) return <Loading />;
 
   return (
     <MovieListStyle>
       <MovieListMainStyle>
         <MovieListH2Style>박스오피스</MovieListH2Style>
+        <SwitchButton
+          isChecked={isChecked}
+          handleToggleCheckbox={handleToggleCheckbox}
+        />
         <Movies movies={movies} pageName={pageName} />
         <MovieListButton showMoreBtn={showMoreBtn} onClick={updateOffset}>
           더보기&nbsp;
@@ -70,7 +89,6 @@ export default function MovieList() {
 }
 
 const MovieListStyle = styled.div`
-  padding-top: 130px;
   scroll-behavior: smooth;
 `;
 
@@ -81,6 +99,7 @@ const MovieListMainStyle = styled.main`
 `;
 
 const MovieListH2Style = styled.h2`
+  margin-bottom: 30px;
   font-size: 2rem;
   font-weight: 500;
   color: ${({ theme }) => theme.fontDarkBlack};

@@ -13,8 +13,7 @@ export default function Movies({ movies, pageName }) {
 
 const MoviesStyle = styled.div`
   max-width: 1100px;
-  margin: 0 auto;
-  margin-top: 2rem;
+  margin: 28px auto 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   row-gap: 2rem;

@@ -20,7 +20,7 @@ export default function Main() {
     navigate('/ticketing');
   };
   useEffect(() => {
-    fetch(`${DEV_MAIN_URL2}`)
+    fetch(`${DEV_MAIN_URL}`)
       .then(res => res.json())
       .then(result => {
         setMovies(result.result);

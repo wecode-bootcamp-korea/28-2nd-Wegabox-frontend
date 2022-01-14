@@ -57,5 +57,5 @@
       "release_date": "2009-01-21"
     }
   ],
-  "total_movie_count": 8
+  "total_movie_count": { "total_movie_count": 8 }
 }
