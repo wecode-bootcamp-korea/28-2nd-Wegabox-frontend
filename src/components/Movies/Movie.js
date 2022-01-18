@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export default function Movie({ movie, pageName }) {
   const navigate = useNavigate();
@@ -11,14 +11,23 @@ export default function Movie({ movie, pageName }) {
     });
   };
 
+  const goToMovieDetail = () => {
+    navigate(`/movie-detail/${movie.movie_id}`, {
+      state: { movie: movie },
+      replace: false,
+    });
+  };
+
   return (
     <MovieStyle>
       <MovieImageStyle alt={movie.title} src={movie.thumbnail_url} />
-      <MovieDescriptionStyle>{movie.description}</MovieDescriptionStyle>
+      <MovieDescriptionStyle pageName={pageName} onClick={goToMovieDetail}>
+        {movie.description}
+      </MovieDescriptionStyle>
       <MovieInfoStyle pageName={pageName}>
         <MovieTitleStyle>{movie.title}</MovieTitleStyle>
         <MovieReleaseDateStyle>
-          개봉일: {movie.release_date}
+          예매율: {movie.ticket_rate}% | 개봉일: {movie.release_date}
         </MovieReleaseDateStyle>
       </MovieInfoStyle>
       <MovieButtonStyle
@@ -63,10 +72,19 @@ const MovieDescriptionStyle = styled.div`
   color: ${({ theme }) => theme.whiteColor};
   opacity: 0;
 
-  &:hover {
-    cursor: pointer;
-    opacity: 1;
-  }
+  ${({ pageName }) => {
+    switch (pageName) {
+      case 'etc':
+        return null;
+      default:
+        return css`
+          &:hover {
+            cursor: pointer;
+            opacity: 1;
+          }
+        `;
+    }
+  }}
 `;
 
 const MovieInfoStyle = styled.div`
@@ -74,10 +92,10 @@ const MovieInfoStyle = styled.div`
   color: ${({ theme }) => theme.fontGrey};
   display: ${({ pageName }) => {
     switch (pageName) {
-      case 'main':
-        return 'none';
-      default:
+      case 'list':
         return 'block';
+      default:
+        return 'none';
     }
   }};
 `;
@@ -101,10 +119,10 @@ const MovieButtonStyle = styled.button`
   color: ${({ theme }) => theme.whiteColor};
   background-color: ${({ theme, pageName }) => {
     switch (pageName) {
-      case 'main':
-        return theme.buttonBlue;
-      default:
+      case 'list':
         return theme.wegaboxPurple;
+      default:
+        return theme.buttonBlue;
     }
   }};
 `;
