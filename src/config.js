@@ -4,3 +4,5 @@ export const DEV_MAIN_URL2 =
 export const DEV_LIST_URL =
   'http://localhost:3000/data/MovieList/movieList.json';
 export const DEV_LIST_URL2 = 'http://8ad2-118-32-35-58.ngrok.io/movies';
+export const DEV_DETAIL_URL =
+  'http://localhost:3000/data/MovieDetail/movieDetail.json';
