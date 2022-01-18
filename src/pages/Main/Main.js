@@ -20,7 +20,7 @@ export default function Main() {
     navigate('/ticketing');
   };
   useEffect(() => {
-    fetch(`${DEV_MAIN_URL}`)
+    fetch(`${DEV_MAIN_URL2}`)
       .then(res => res.json())
       .then(result => {
         setMovies(result.result);
@@ -35,7 +35,7 @@ export default function Main() {
 
   return (
     <MainStyle>
-      <MainSectionStyle $bgimg={bgImg}>
+      <MainSectionStyle bgimg={bgImg}>
         <MainButtonStyle onClick={goToBoxOffice}>박스오피스</MainButtonStyle>
         <Movies movies={movies} pageName={pageName} />
         <Menu goToBoxOffice={goToBoxOffice} goToTicketing={goToTicketing} />
@@ -45,7 +45,6 @@ export default function Main() {
 }
 
 const MainStyle = styled.main`
-  padding-top: 130px;
   text-align: center;
   font-size: 1rem;
 `;
@@ -71,7 +70,7 @@ const MainSectionStyle = styled.section`
     z-index: -2;
     width: 100%;
     height: 100%;
-    background-image: url(${props => props.$bgimg});
+    background-image: url(${({ bgimg }) => bgimg});
     background-repeat: no-repeat;
     background-size: cover;
     transform: scale(1.1);
