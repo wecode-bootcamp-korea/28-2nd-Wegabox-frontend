@@ -22,6 +22,7 @@ const Disable = ({ keyName, value, dataId, setState }) => {
 };
 
 const DisableButton = styled(SelectButton)`
+  padding: 5px;
   span {
     font-weight: normal;
     color: ${props => props.theme.fontGrey};

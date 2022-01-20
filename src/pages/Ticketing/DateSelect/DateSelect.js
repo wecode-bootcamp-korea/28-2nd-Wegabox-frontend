@@ -8,8 +8,6 @@ const DateSelect = ({ state, fastDate, selection, setSelection }) => {
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
-    console.log('date 컴포넌트');
-
     if (fastDate) {
       setSelection(prev => {
         const selectedMovie = prev.deactiveMovie;
@@ -20,6 +18,7 @@ const DateSelect = ({ state, fastDate, selection, setSelection }) => {
       });
       setStartDate(new Date(fastDate));
     } else {
+      return null;
     }
   }, [fastDate]);
 
@@ -27,15 +26,14 @@ const DateSelect = ({ state, fastDate, selection, setSelection }) => {
     const dateString = dateConverter(date);
 
     setStartDate(date);
-    setSelection(prev => {
-      if (selection.date === dateString) {
-        return { ...prev };
-      } else {
+
+    if (selection.date !== dateString) {
+      setSelection(prev => {
         resetValue(prev);
         prev.date = dateString;
         return { ...prev };
-      }
-    });
+      });
+    }
   };
 
   return (
@@ -43,6 +41,7 @@ const DateSelect = ({ state, fastDate, selection, setSelection }) => {
       <DatePicker
         selected={startDate}
         onChange={selectDate}
+        minDate={new Date()}
         todayButton="오늘"
         inline
       />
@@ -54,6 +53,44 @@ const CalendarContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 270px;
+
+  .react-datepicker,
+  .react-datepicker__header {
+    width: 270px;
+    font-size: 1em;
+    border: 1px solid ${props => props.theme.wegaboxDarkPurple};
+  }
+
+  .react-datepicker__month-container {
+    height: 400px;
+  }
+
+  .react-datepicker__day {
+    margin-top: 1.5em;
+  }
+  .react-datepicker__day--selected {
+    background-color: ${props => props.theme.buttonBlue};
+    border-radius: 50%;
+  }
+  .react-datepicker__header {
+    background-color: ${props => props.theme.wegaboxDarkPurple};
+  }
+
+  .react-datepicker__current-month,
+  .react-datepicker__day-name,
+  .react-datepicker__today-button {
+    color: white;
+  }
+
+  .react-datepicker__today-button {
+    background: ${props => props.theme.wegaboxPurple};
+  }
+
+  .react-datepicker__day--keyboard-selected {
+    background-color: white;
+    color: black;
+  }
 `;
 
 export default DateSelect;

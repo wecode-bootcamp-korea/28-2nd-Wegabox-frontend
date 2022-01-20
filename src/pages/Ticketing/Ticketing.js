@@ -8,27 +8,21 @@ import { dateConverter, makeQueryString } from '../../utils/Functions';
 import styled from 'styled-components';
 
 const Ticketing = () => {
+  const { state } = useLocation();
   const [allData, setAllData] = useState({});
   const [selection, setSelection] = useState({
-    date: '', //날짜 문자열 데이터
-    movie: '', //영화 id 값
-    region: '', // 영화관 지역 id 값
-    theater: '', //극장 id 값
-    schedule: '', //상영시간 id 값
-    deactiveMovie: '',
+    date: dateConverter(new Date()),
+    movie: '',
+    region: '',
+    theater: '',
+    schedule: '',
+    deactiveMovie: state ? state.movie_id : '',
   });
 
   const navigate = useNavigate();
   const location = useLocation();
-  const { state } = useLocation();
-  // const selectedMovieId = state?.movie_id;
-
-  // console.log(selectedMovieId);
-  console.log('렌더링', state);
 
   useEffect(() => {
-    console.log('fetching');
-
     if (selection.schedule) {
       fetch(`https://12d7-211-106-114-186.ngrok.io/ticketings`, {
         method: 'POST',
@@ -55,23 +49,6 @@ const Ticketing = () => {
   }, [location.search]);
 
   useEffect(() => {
-    console.log('오늘날짜 selection.date 수정');
-    const date = new Date();
-
-    setSelection(prev => {
-      if (state) {
-        prev.deactiveMovie = state ? state.movie_id : '';
-        prev.date = dateConverter(date);
-      } else {
-        prev.date = dateConverter(date);
-      }
-      return { ...prev };
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log('쿼리 만들어주기');
-
     const queryUrl = makeQueryString(selection);
     navigate(queryUrl);
   }, [selection]);
@@ -112,7 +89,8 @@ const Ticketing = () => {
 
 const TicketingContainer = styled.div`
   margin: auto;
-  margin-top: 130px;
+  margin-top: 5vh;
+  margin-bottom: 20vh;
   width: 1300px;
   height: 570px;
   /* border: 1px solid red; */
@@ -136,9 +114,6 @@ const SelectContainer = styled.div`
   width: 100%;
   height: 80%;
   border: 3px solid ${props => props.theme.wegaboxDarkPurple};
-  /* background-color: pink; */
 `;
-
-// const valid = query => {};
 
 export default Ticketing;

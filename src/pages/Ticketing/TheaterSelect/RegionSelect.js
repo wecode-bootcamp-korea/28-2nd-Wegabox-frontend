@@ -116,7 +116,7 @@ const TitleContainer = styled.div`
 const TheaterTab = styled.div`
   display: inline-block;
   width: 80%;
-  border: 1px solid rgb(85, 85, 85);
+  border: 1px solid ${props => props.theme.wegaboxDarkPurple};
   border-bottom: 0;
   font-weight: bold;
   font-size: 20px;
@@ -127,13 +127,14 @@ const TheaterTab = styled.div`
 
 const SpecialTab = styled(TheaterTab.withComponent('div'))`
   border: 0;
-  border-bottom: 1px solid rgb(85, 85, 85);
+  border-bottom: 1px solid ${props => props.theme.wegaboxDarkPurple};
 `;
 
 const RegionList = styled.ul`
   width: 50%;
   padding-top: 10px;
   padding-left: 15px;
+  padding-right: 15px;
   border: 1px solid transparent;
 `;
 
