@@ -5,12 +5,16 @@ import usePageName from '../../hooks/usePageName';
 import { DEV_MAIN_URL, DEV_MAIN_URL2 } from '../../config';
 import Menu from './Menu';
 import Movies from '../../components/Movies/Movies';
+import useFetch from '../../hooks/useFetch';
+import Loading from '../../components/Loading/Loading';
 
 export default function Main() {
   const [movies, setMovies] = useState([]);
   const [bgImg, setBgImg] = useState('');
   const { pageName } = usePageName();
   const navigate = useNavigate();
+  const url = DEV_MAIN_URL2;
+  const [loading, result, fetchData] = useFetch(url);
 
   const goToBoxOffice = () => {
     navigate('/movies');
@@ -20,18 +24,15 @@ export default function Main() {
     navigate('/ticketing');
   };
   useEffect(() => {
-    fetch(`${DEV_MAIN_URL2}`)
-      .then(res => res.json())
-      .then(result => {
-        setMovies(result.result);
-        setBgImg(result.result[0].thumbnail_url);
-      });
-    return () => {};
+    fetchData();
   }, []);
 
-  if (!movies || !bgImg) {
-    return <img alt="로딩" src="/images/loading.gif" />;
-  }
+  useEffect(() => {
+    result?.result && setMovies(result?.result);
+    setBgImg(result?.result[0]?.thumbnail_url);
+  }, [result]);
+
+  if (loading) return <Loading />;
 
   return (
     <MainStyle>
