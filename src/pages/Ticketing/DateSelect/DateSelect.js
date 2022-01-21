@@ -70,7 +70,7 @@ const CalendarContainer = styled.div`
     margin-top: 1.5em;
   }
   .react-datepicker__day--selected {
-    background-color: ${props => props.theme.buttonBlue};
+    background-color: ${props => props.theme.buttonBlue} !important;
     border-radius: 50%;
   }
   .react-datepicker__header {
