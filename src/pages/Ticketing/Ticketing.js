@@ -20,6 +20,7 @@ const Ticketing = () => {
   });
 
   console.log('테스트 용 콘솔로그');
+  console.log('테스트 용 콘솔로그');
 
   const navigate = useNavigate();
   const location = useLocation();
