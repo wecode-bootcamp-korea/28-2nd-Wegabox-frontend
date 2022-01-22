@@ -24,14 +24,17 @@ const Ticketing = () => {
 
   useEffect(() => {
     if (selection.schedule) {
-      fetch(`https://12d7-211-106-114-186.ngrok.io/ticketings`, {
-        method: 'POST',
-        headers: {
-          Authorization:
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.4YEzZNRcwdhQwufQjjNUcaM5z4s6SSEXooJ6N8SvVsY',
-        },
-        body: JSON.stringify({ schedule_id: `${selection.schedule}` }),
-      })
+      fetch(
+        `http://ec2-15-164-220-64.ap-northeast-2.compute.amazonaws.com:8000/ticketings`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization:
+              'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.4YEzZNRcwdhQwufQjjNUcaM5z4s6SSEXooJ6N8SvVsY',
+          },
+          body: JSON.stringify({ schedule_id: `${selection.schedule}` }),
+        }
+      )
         .then(res => res.json())
         .then(result => {
           alert(result.message);
@@ -39,7 +42,7 @@ const Ticketing = () => {
         });
     } else {
       fetch(
-        `https://12d7-211-106-114-186.ngrok.io/ticketings${location.search}`
+        `http://ec2-15-164-220-64.ap-northeast-2.compute.amazonaws.com:8000/ticketings${location.search}`
       )
         .then(response => response.json())
         .then(result => {
