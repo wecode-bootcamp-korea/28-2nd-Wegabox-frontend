@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const SelectButton = styled.button`
-  /* width: 50%; */
   margin: 5px 0;
   line-height: 19px;
   text-align: left;

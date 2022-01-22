@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { dateConverter, resetValue } from '../../../utils/Functions';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DateSelect = ({ state, fastDate, selection, setSelection }) => {
+const DateSelect = ({ fastDate, selection, setSelection }) => {
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {

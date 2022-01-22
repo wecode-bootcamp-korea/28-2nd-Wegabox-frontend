@@ -19,6 +19,8 @@ const Ticketing = () => {
     deactiveMovie: state ? state.movie_id : '',
   });
 
+  console.log('테스트 용 콘솔로그');
+
   const navigate = useNavigate();
   const location = useLocation();
 
