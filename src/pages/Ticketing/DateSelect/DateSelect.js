@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { dateConverter, resetValue } from '../../../utils/Functions';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const DateSelect = ({ state, fastDate, selection, setSelection }) => {
+const DateSelect = ({ fastDate, selection, setSelection }) => {
   const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
@@ -70,7 +70,7 @@ const CalendarContainer = styled.div`
     margin-top: 1.5em;
   }
   .react-datepicker__day--selected {
-    background-color: ${props => props.theme.buttonBlue};
+    background-color: ${props => props.theme.buttonBlue} !important;
     border-radius: 50%;
   }
   .react-datepicker__header {
