@@ -22,6 +22,8 @@ const Ticketing = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log('콘솔 테스트');
+
   useEffect(() => {
     if (selection.schedule) {
       fetch(
