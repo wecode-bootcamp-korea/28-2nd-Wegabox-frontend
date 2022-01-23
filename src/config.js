@@ -5,5 +5,4 @@ export const DEV_LIST_URL =
   'http://localhost:3000/data/MovieList/movieList.json';
 export const DEV_LIST_URL2 =
   'http://ec2-15-164-220-64.ap-northeast-2.compute.amazonaws.com/movies';
-export const DEV_DETAIL_URL =
-  'http://localhost:3000/data/MovieDetail/movieDetail.json';
+export const DEV_DETAIL_URL = '/data/MovieDetail/movieDetail.json';
