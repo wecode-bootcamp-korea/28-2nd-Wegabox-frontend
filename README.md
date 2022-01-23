@@ -7,15 +7,9 @@
 ## 개발 인원 및 기간
 
 - 2022.01.10 ~ 2022.01.21
-- Front-End: [김용선](https://github.com/seankim1111), [윤종호](https://github.com/myway8907), [정민아](https://github.com/minami-cs)
+- Front-End: [김용선](https://github.com/seankim1111, [윤종호](https://github.com/myway8907) [정민아](https://github.com/minami-cs)
 - Back-End: [강민성](https://github.com/nonasking), [장민욱](https://github.com/black2code)
 - [Wegabox Back-End Repository](https://github.com/wecode-bootcamp-korea/28-2nd-Wegabox-backend)
-
-# Front-End 팀원 담당영역
-
-- 정민아: 메인페이지, 박스오피스 페이지, 영화 상세정보 페이지
-- 김용선: 카카오 소셜로그인
-- 윤종호: 예매페이지
 
 ## 사용 기술
 
@@ -30,14 +24,19 @@
 ## 구현 사항
 
 1. 메인 페이지
+   ![mainpage](https://user-images.githubusercontent.com/66506477/150678855-7ed2702d-0e8e-488e-b173-54b2ee9e8d33.gif)
 
 2. 소셜 로그인(카카오톡)
+   ![kakaologin](https://user-images.githubusercontent.com/66506477/150678726-a595bd25-8e8d-4a93-a1a9-45445124f9b1.gif)
 
 3. 목록 페이지
+   ![listpage](https://user-images.githubusercontent.com/66506477/150679005-9edb5a0c-9308-4a27-ad9d-2a3b4fa5713c.gif)
 
 4. 상세 페이지
+   ![detailpage](https://user-images.githubusercontent.com/66506477/150678923-0c325bbd-5f7c-4184-b8ae-c74aa0b6575d.gif)
 
 5. 예매 페이지
+   ![bookingpage](https://user-images.githubusercontent.com/66506477/150679205-b99c68ed-0907-4e31-9f14-a6bd4eccc5d1.gif)
 
 # Reference
 
