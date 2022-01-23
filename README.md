@@ -21,7 +21,7 @@
 - JavaScript, React, React-router-dom, Styled-Components, React third-party library (chart.js, datepicker, etc.)
 ### Common
 - Git, Github, Slack, Trello
-
+### 팀원 상세 구현 내용
 - 정민아: 메인, 박스오피스, 상세정보 페이지 전체 구현, 박스오피스 페이지 필터링 기능 구현, 상세정보 페이지 chart.js 이용한 시각화 데이터 구현
 - 김용선: 카카오 소셜 로그인 기능 구현
 - 윤종호: 예매 페이지 전체 화면구성 및 예매 프로세스 구현
