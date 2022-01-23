@@ -7,7 +7,7 @@
 ## 개발 인원 및 기간
 
 - 2022.01.10 ~ 2022.01.21
-- Front-End: [김용선](https://github.com/seankim1111, [윤종호](https://github.com/myway8907) [정민아](https://github.com/minami-cs)
+- Front-End: [김용선](https://github.com/seankim1111), [윤종호](https://github.com/myway8907) [정민아](https://github.com/minami-cs)
 - Back-End: [강민성](https://github.com/nonasking), [장민욱](https://github.com/black2code)
 - [Wegabox Back-End Repository](https://github.com/wecode-bootcamp-korea/28-2nd-Wegabox-backend)
 
