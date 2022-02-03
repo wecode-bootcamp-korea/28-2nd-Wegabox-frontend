@@ -64,7 +64,6 @@ const ScheduleTab = styled.div`
 `;
 
 const ScheduleList = styled.ul`
-  /* width: 50%; */
   padding-top: 10px;
   padding-left: 15px;
   border: 1px solid transparent;

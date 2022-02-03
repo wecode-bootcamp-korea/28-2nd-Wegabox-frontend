@@ -70,12 +70,10 @@ const SelectButton = styled.button`
   span:first-child {
     font-size: 15px;
     font-weight: bold;
-    /* color: black; */
     font-family: 'NanumBarunGothic';
   }
   span:nth-last-child() {
     font-size: 15px;
-    /* color: grey; */
     font-family: 'NanumBarunGothic';
   }
 `;
